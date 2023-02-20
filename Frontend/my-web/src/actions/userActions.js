@@ -73,7 +73,7 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOAD_USER_FAIL, payload: error?.response?.data?.message });
   }
 };
 // Logout User
@@ -86,7 +86,6 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
   }
 };
-
 //update user
 export const updateProfile = (userData) => async (dispatch) => {
   try {

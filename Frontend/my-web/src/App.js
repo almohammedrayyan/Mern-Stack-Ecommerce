@@ -18,9 +18,7 @@ import ProtectedRoute from "./component/Route/ProtectedRoutes";
 import UpdatedProfile from "./component/User/UpdatedProfile";
 import UpdatePassword from "./component/User/UpdatePassword";
 import ResetPassword from "./component/User/ResetPassword";
-import Cart from "./component/Cart/Cart";
 const App = () => {
-  const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.user);
   useEffect(() => {
     WebFont.load({
@@ -40,8 +38,10 @@ const App = () => {
       <Route path="/products/:keyword" component={Products} />
       <ProtectedRoute path="/account" component={Profile} />
       <ProtectedRoute path="/me/update" component={UpdatedProfile} />
+      {/* <ProtectedRoute path="/shipping" component={Shipping} /> */}
+
       <Route exact path="/password/forgot" component={ForgotPassword} />
-      <Route exact path="/cart" component={Cart} />
+      {/* <Route exact path="/cart" component={Cart} /> */}
 
       {/* <Route exact path="/search" component={Search} /> */}
       <Route exact path="/password/reset/:token" component={ResetPassword} />
