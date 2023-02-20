@@ -2,6 +2,8 @@ import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
 import { HiSearch } from "react-icons/hi";
+import { BiCartAlt } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
 const options = {
   burgerColorHover: "#eb4034",
   logo,
@@ -26,6 +28,8 @@ const options = {
   link1ColorHover: "#eb4034",
   link1Margin: "1vmax",
   profileIconUrl: "/login",
+  searchIconUrl: "/search",
+  cartIconUrl: "/cart",
   profileIconColor: "rgba(35, 35, 35,0.8)",
   searchIconColor: "rgba(35, 35, 35,0.8)",
   cartIconColor: "rgba(35, 35, 35,0.8)",
@@ -34,7 +38,11 @@ const options = {
   cartIconColorHover: "#eb4034",
   cartIconMargin: "1vmax",
   searchIcon: true,
+  profileIcon: true,
+  cartIcon: true,
+  ProfileIconElement: FaUserAlt,
   SearchIconElement: HiSearch,
+  CartIconElement: BiCartAlt,
 };
 
 const Header = () => {

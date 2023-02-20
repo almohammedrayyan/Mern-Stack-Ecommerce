@@ -7,7 +7,6 @@ import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-// import { addItemsToCart } from "../../actions/cartAction";
 import {
   Dialog,
   DialogActions,
@@ -16,6 +15,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
+import { addToCart } from "../../actions/cartActions";
 // import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductDetails = ({ match }) => {
@@ -43,7 +43,7 @@ const ProductDetails = ({ match }) => {
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) return;
+    if (product.stock <= quantity) return;
 
     const qty = quantity + 1;
     setQuantity(qty);
@@ -57,8 +57,8 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
-    // dispatch(addItemsToCart(match.params.id, quantity));
-    // alert.success("Item Added To Cart");
+    dispatch(addToCart(match.params.id, quantity));
+    alert.success("Item Added To Cart");
   };
 
   const submitReviewToggle = () => {
@@ -135,7 +135,7 @@ const ProductDetails = ({ match }) => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -144,8 +144,8 @@ const ProductDetails = ({ match }) => {
 
                 <p>
                   Status:
-                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
+                    {product.stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>
               </div>

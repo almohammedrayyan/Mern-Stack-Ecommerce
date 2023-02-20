@@ -9,16 +9,29 @@ import {
   productDetailsReducer,
   productReducer,
 } from "./reducers/productReducers";
-import { profileReducer, userReducer } from "./reducers/userReducers";
+import {
+  forgotPasswordReducer,
+  profileReducer,
+  userReducer,
+} from "./reducers/userReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 const reducer = combineReducers({
   products: productReducer,
   productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
+  forgotPassword: forgotPasswordReducer,
+  cart: cartReducer,
 });
 
-let initialState = {};
+let initialState = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItem"))
+      : [],
+  },
+};
 
 const middleware = [thunk];
 const store = createStore(
