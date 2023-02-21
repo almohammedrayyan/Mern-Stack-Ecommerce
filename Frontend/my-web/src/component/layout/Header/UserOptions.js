@@ -13,7 +13,7 @@ import { logout } from "../../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
-  const { cartItems } = useSelector((state) => state.cart);
+  // const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
   const history = useHistory();
