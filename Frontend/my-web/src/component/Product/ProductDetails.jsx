@@ -66,30 +66,12 @@ const ProductDetails = ({ match }) => {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const reviewSubmitHandler = () => {
-    // const myForm = new FormData();
-    // myForm.set("rating", rating);
-    // myForm.set("comment", comment);
-    // myForm.set("productId", match.params.id);
-    // dispatch(newReview(myForm));
-    // setOpen(false);
-  };
-
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearError());
     }
 
-    // if (reviewError) {
-    //   alert.error(reviewError);
-    //   dispatch(clearErrors());
-    // }
-
-    // if (success) {
-    //   alert.success("Review Submitted Successfully");
-    //   dispatch({ type: NEW_REVIEW_RESET });
-    // }
     dispatch(getOneProductDetails(match.params.id));
   }, [dispatch, match.params.id, error, alert]);
 
@@ -188,9 +170,7 @@ const ProductDetails = ({ match }) => {
               <Button onClick={submitReviewToggle} color="secondary">
                 Cancel
               </Button>
-              <Button onClick={reviewSubmitHandler} color="primary">
-                Submit
-              </Button>
+              <Button color="primary">Submit</Button>
             </DialogActions>
           </Dialog>
 

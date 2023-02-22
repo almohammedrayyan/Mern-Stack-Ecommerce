@@ -37,7 +37,7 @@ const Cart = ({ history }) => {
 
   return (
     <Fragment>
-      {cartItems.length === 0 ? (
+      {cartItems?.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />
 
@@ -88,7 +88,7 @@ const Cart = ({ history }) => {
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Gross Total</p>
-                <p>{`₹${cartItems.reduce(
+                <p>{`₹${cartItems?.reduce(
                   (acc, item) => acc + item.quantity * item.price,
                   0
                 )}`}</p>
