@@ -15,6 +15,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
+import { addToCart } from "../../actions/cartActions";
 // import { addToCart } from "../../actions/cartActions";
 // import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
@@ -57,8 +58,8 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCartHandler = () => {
-    // dispatch(addToCart(match.params.id, quantity));
-    // alert.success("Item Added To Cart");
+    dispatch(addToCart(match.params.id, quantity));
+    alert.success("Item Added To Cart");
   };
 
   const submitReviewToggle = () => {
