@@ -63,7 +63,7 @@ exports.logout = catchError(async (req, res, next) => {
   });
   res.status(200).json({
     success: true,
-    message: "Logout successfully",
+    message: "Logout Successfully",
   });
 });
 // forgot pasword

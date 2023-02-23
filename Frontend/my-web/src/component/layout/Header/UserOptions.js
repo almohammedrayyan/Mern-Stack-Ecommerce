@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./Header.css";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -59,7 +59,6 @@ const UserOptions = ({ user }) => {
 
   function logoutUser() {
     dispatch(logout());
-    history.push("/login");
     alert.success("Logout Successfully");
   }
 

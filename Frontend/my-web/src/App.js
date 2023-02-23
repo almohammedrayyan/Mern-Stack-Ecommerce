@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import store from "../src/store";
 import { loadUser, updateProfile } from "../src/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import WebFont from "webfontloader";
 import Home from "./component/Home/Home";
 import ForgotPassword from "./component/User/ForgotPasword";
@@ -20,8 +22,20 @@ import UpdatePassword from "./component/User/UpdatePassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
+import Payment from "./component/Cart/Payment";
+import OrderSuccess from "./component/Cart/OrderSuccess";
+
+import { useState } from "react";
+import axios from "axios";
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeAPiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+    setStripeAPiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     WebFont.load({
       google: {
@@ -29,11 +43,17 @@ const App = () => {
       },
     });
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
   return (
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+      {stripeApiKey && (
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute exact path="/process/payment" component={Payment} />
+        </Elements>
+      )}
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={LoginSignUp} />
       <Route exact path="/products" component={Products} />
@@ -44,7 +64,8 @@ const App = () => {
 
       <Route exact path="/password/forgot" component={ForgotPassword} />
       <Route exact path="/cart" component={Cart} />
-
+      <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+      <ProtectedRoute exact path="/success" component={OrderSuccess} />
       {/* <Route exact path="/search" component={Search} /> */}
       <Route exact path="/password/reset/:token" component={ResetPassword} />
       <ProtectedRoute
