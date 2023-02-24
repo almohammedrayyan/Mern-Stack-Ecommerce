@@ -1,7 +1,5 @@
 const catchError = require("../middleware/catchAsyncError");
-const stripe = require("stripe")(
-  "sk_test_51MeZA1SJgCmDNBoxpXxyEXCqANN7vQxpkc9QPx6KWLiya8NQSSCuDaCKMd9mEvYlYOayNGBz3afUuUixxAiPeJ1p00Thc56VEw"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.processPayment = catchError(async (req, res, next) => {
   const myPayment = await stripe.paymentIntents.create({
@@ -16,10 +14,7 @@ exports.processPayment = catchError(async (req, res, next) => {
     .json({ success: true, client_secret: myPayment.client_secret });
 });
 exports.sendStripeApiKey = catchError(async (req, res, next) => {
-  res
-    .status(200)
-    .json({
-      stripeApiKey:
-        "pk_test_51MeZA1SJgCmDNBoxTlq8mGqBsFvFSGDZdTUGoxz6sA8A3sBms0Ckol2CNtfDWFAK2POOequfQ7S8lqCJ27gq3qOU00YVtNWnqF",
-    });
+  res.status(200).json({
+    stripeApiKey: process.env.STRIPE_API_KEY,
+  });
 });

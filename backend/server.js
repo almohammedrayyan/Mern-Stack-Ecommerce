@@ -18,10 +18,15 @@ dotenv.config({ path: "backend/confiq/confiq.env" });
 
 connectDataBase();
 
+// cloudinary.config({
+//   cloud_name: "dotylvduq",
+//   api_key: "814661749281152",
+//   api_secret: "M7AfXdmCtZt3cWr65lelRkDbTto",
+// });
 cloudinary.config({
-  cloud_name: "dotylvduq",
-  api_key: "814661749281152",
-  api_secret: "M7AfXdmCtZt3cWr65lelRkDbTto",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_SECRET_KEY,
 });
 
 app.listen(process.env.PORT, () => {

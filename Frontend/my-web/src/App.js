@@ -28,6 +28,9 @@ import OrderSuccess from "./component/Cart/OrderSuccess";
 
 import { useState } from "react";
 import axios from "axios";
+import MyOrders from "./component/Order/MyOrders";
+import OrderDetails from "./component/Order/OrderDetails";
+
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeAPiKey] = useState("");
@@ -64,8 +67,7 @@ const App = () => {
 
       <Route exact path="/password/forgot" component={ForgotPassword} />
       <Route exact path="/cart" component={Cart} />
-      <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
-      <ProtectedRoute exact path="/success" component={OrderSuccess} />
+
       {/* <Route exact path="/search" component={Search} /> */}
       <Route exact path="/password/reset/:token" component={ResetPassword} />
       <ProtectedRoute
@@ -73,7 +75,13 @@ const App = () => {
         path="/password/update"
         component={UpdatePassword}
       />
+      <ProtectedRoute exact path="/success" component={OrderSuccess} />
+      <ProtectedRoute exact path="/orders" component={MyOrders} />
       <Route exact path="/product/:id" component={ProductDetails} />
+      <Switch>
+        <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
+        <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+      </Switch>
     </Router>
   );
 };

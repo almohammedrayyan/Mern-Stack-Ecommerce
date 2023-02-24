@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
 const dotenv = require("dotenv");
-dotenv.config({ path: "backend/config/confiq.env" });
+dotenv.config({ path: "backend/.env" });
 
 app.use(express.json());
 app.use(cookie());

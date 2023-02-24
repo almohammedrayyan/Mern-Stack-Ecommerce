@@ -141,14 +141,14 @@ exports.resetPassword = catchError(async (req, res, next) => {
 //get user Details
 exports.getUserDetails = catchError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-  // if (!user) {
-  //   return next(
-  //     new ErrorHandling(
-  //       "Reset Password Token is invalid or has been expired",
-  //       400
-  //     )
-  //   );
-  // }
+  if (!user) {
+    return next(
+      new ErrorHandling(
+        "Reset Password Token is invalid or has been expired",
+        400
+      )
+    );
+  }
   res.status(200).json({
     success: true,
     user,

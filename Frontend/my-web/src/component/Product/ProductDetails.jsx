@@ -2,11 +2,19 @@ import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearError, getOneProductDetails } from "../../actions/productActions";
+import {
+  clearError,
+  getOneProductDetails,
+  newReview,
+} from "../../actions/productActions";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
+
+import { Rating } from "@material-ui/lab";
+import { addToCart } from "../../actions/cartActions";
+import { NEW_REVIEW_RESET } from "../../constants/productConstant";
 import {
   Dialog,
   DialogActions,
@@ -14,11 +22,6 @@ import {
   DialogTitle,
   Button,
 } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { addToCart } from "../../actions/cartActions";
-// import { addToCart } from "../../actions/cartActions";
-// import { NEW_REVIEW_RESET } from "../../constants/productConstants";
-
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -27,9 +30,7 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetails
   );
 
-  //   const { success, error: reviewError } = useSelector(
-  //     (state) => state.newReview
-  //   );
+  const { success, error: reviewError } = useSelector((state) => state.review);
 
   const options = {
     size: "large",
@@ -66,15 +67,35 @@ const ProductDetails = ({ match }) => {
     open ? setOpen(false) : setOpen(true);
   };
 
+  const reviewSubmitHandler = () => {
+    const myForm = new FormData();
+
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId", match.params.id);
+
+    dispatch(newReview(myForm));
+
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearError());
     }
 
-    dispatch(getOneProductDetails(match.params.id));
-  }, [dispatch, match.params.id, error, alert]);
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearError());
+    }
 
+    if (success) {
+      alert.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
+    dispatch(getOneProductDetails(match.params.id));
+  }, [dispatch, match.params.id, error, alert, reviewError, success]);
   return (
     <Fragment>
       {loading ? (
@@ -170,7 +191,9 @@ const ProductDetails = ({ match }) => {
               <Button onClick={submitReviewToggle} color="secondary">
                 Cancel
               </Button>
-              <Button color="primary">Submit</Button>
+              <Button onClick={reviewSubmitHandler} color="primary">
+                Submit
+              </Button>
             </DialogActions>
           </Dialog>
 
