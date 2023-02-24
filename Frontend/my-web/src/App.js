@@ -25,11 +25,11 @@ import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
 import OrderSuccess from "./component/Cart/OrderSuccess";
-
 import { useState } from "react";
 import axios from "axios";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
+import Dashboard from "./component/Admin/Dashboard";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -82,6 +82,7 @@ const App = () => {
         <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
       </Switch>
+      <ProtectedRoute exact path="/admin/dashboard" component={Dashboard} />
     </Router>
   );
 };
