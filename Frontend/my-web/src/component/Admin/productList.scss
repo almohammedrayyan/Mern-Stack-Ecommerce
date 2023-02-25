@@ -2,11 +2,12 @@
   height: 600px;
   padding: 25px;
   display: flex;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
   .datatableTitle {
     flex-grow: 1;
     width: 100px;
-    font-size: 20px;
+    font-size: 25px;
     color: grey;
     margin-bottom: 25px;
     align-items: center;
@@ -67,16 +68,17 @@
     .viewButton {
       padding: 2px 5px;
       border-radius: 5px;
-      color: darkblue;
-      border: 1px dotted rgba(0, 0, 139, 0.596);
+      color: rgb(0, 86, 139);
       cursor: pointer;
+      &:hover {
+        background-color: yellow;
+      }
     }
 
     .deleteButton {
       padding: 2px 5px;
       border-radius: 5px;
       color: crimson;
-      border: 1px dotted rgba(220, 20, 60, 0.6);
       cursor: pointer;
     }
   }

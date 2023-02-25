@@ -27,7 +27,7 @@ import {
   NEW_PRODUCT_REQUEST,
 } from "../constants/productConstant";
 
-export const productReducer = (state = { products: [] }, action) => {
+export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
     case ADMIN_PRODUCT_REQUEST:
@@ -63,7 +63,7 @@ export const productReducer = (state = { products: [] }, action) => {
       return state;
   }
 };
-export const productsReducer = (state = {}, action) => {
+export const productReducer = (state = {}, action) => {
   switch (action.type) {
     case DELETE_PRODUCT_REQUEST:
     case UPDATE_PRODUCT_REQUEST:
@@ -120,6 +120,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
       };
     case NEW_PRODUCT_SUCCESS:
       return {
+        ...state,
         loading: false,
         success: action.payload.success,
         product: action.payload.product,

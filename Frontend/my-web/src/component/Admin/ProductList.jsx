@@ -3,13 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstant";
@@ -22,9 +16,8 @@ import {
 const ProductList = ({ history, match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const [open, setOpen] = useState(false);
 
-  const { error, products, loading } = useSelector((state) => state.products);
+  const { error, products } = useSelector((state) => state.products);
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
@@ -65,7 +58,7 @@ const ProductList = ({ history, match }) => {
         return (
           <Fragment>
             <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
-              <EditIcon />
+              <EditIcon color="primary" />
             </Link>
 
             <Button
@@ -73,7 +66,7 @@ const ProductList = ({ history, match }) => {
                 deleteProductHandler(params.getValue(params.id, "id"))
               }
             >
-              <DeleteIcon />
+              <DeleteIcon color="secondary" />
             </Button>
           </Fragment>
         );

@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearError, createProduct } from "../../actions/productActions";
+import {
+  clearError,
+  updateProduct,
+  getOneProductDetails,
+} from "../../actions/productActions";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
@@ -10,20 +13,26 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstant";
+import { UPDATE_PRODUCT_RESET } from "../../constants/productConstant";
 
-const NewProduct = ({ history }) => {
+const UpdateProduct = ({ history, match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { error, product } = useSelector((state) => state.productDetails);
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.product);
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [stock, setStock] = useState(0);
+  const [stock, setStock] = useState();
   const [images, setImages] = useState([]);
+  const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
@@ -36,20 +45,46 @@ const NewProduct = ({ history }) => {
     "SmartPhones",
   ];
 
+  const productId = match?.params?.id;
+
   useEffect(() => {
+    if (product && product?._id !== productId) {
+      dispatch(getOneProductDetails(productId));
+    } else {
+      setName(product?.name);
+      setDescription(product?.description);
+      setPrice(product?.price);
+      setCategory(product?.category);
+      setStock(product?.stock);
+      setOldImages(product?.images);
+    }
     if (error) {
       alert.error(error);
       dispatch(clearError());
     }
 
-    if (success) {
-      alert.success("Product Created Successfully");
-      history?.push("/admin/dashboard");
-      dispatch({ type: NEW_PRODUCT_RESET });
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearError());
     }
-  }, [dispatch, alert, error, history, success]);
 
-  const createProductSubmitHandler = (e) => {
+    if (isUpdated) {
+      alert.success("Product Updated Successfully");
+      history.push("/admin/products");
+      dispatch({ type: UPDATE_PRODUCT_RESET });
+    }
+  }, [
+    dispatch,
+    alert,
+    error,
+    history,
+    isUpdated,
+    productId,
+    product,
+    updateError,
+  ]);
+
+  const updateProductSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -63,14 +98,15 @@ const NewProduct = ({ history }) => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(createProduct(myForm));
+    dispatch(updateProduct(productId, myForm));
   };
 
-  const createProductImagesChange = (e) => {
+  const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
 
     setImages([]);
     setImagesPreview([]);
+    setOldImages([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -94,9 +130,9 @@ const NewProduct = ({ history }) => {
           <form
             className="createProductForm"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
 
             <div>
               <SpellcheckIcon />
@@ -105,6 +141,7 @@ const NewProduct = ({ history }) => {
                 placeholder="Product Name"
                 required
                 onChange={(e) => setName(e.target.value)}
+                value={product?.name}
               />
             </div>
             <div>
@@ -114,6 +151,7 @@ const NewProduct = ({ history }) => {
                 placeholder="Price"
                 required
                 onChange={(e) => setPrice(e.target.value)}
+                value={product?.price}
               />
             </div>
 
@@ -125,12 +163,16 @@ const NewProduct = ({ history }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
+                value={product?.description}
               ></textarea>
             </div>
 
             <div>
               <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
+              <select
+                value={product?.category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
@@ -144,9 +186,10 @@ const NewProduct = ({ history }) => {
               <StorageIcon />
               <input
                 type="number"
-                placeholder="Stock"
+                placeholder="stock"
                 required
                 onChange={(e) => setStock(e.target.value)}
+                value={product?.stock}
               />
             </div>
 
@@ -155,9 +198,16 @@ const NewProduct = ({ history }) => {
                 type="file"
                 name="avatar"
                 accept="image/*"
-                onChange={createProductImagesChange}
+                onChange={updateProductImagesChange}
                 multiple
               />
+            </div>
+
+            <div id="createProductFormImage">
+              {oldImages &&
+                oldImages?.map((image, index) => (
+                  <img key={index} src={image?.url} alt="Old Product Preview" />
+                ))}
             </div>
 
             <div id="createProductFormImage">
@@ -180,4 +230,4 @@ const NewProduct = ({ history }) => {
   );
 };
 
-export default NewProduct;
+export default UpdateProduct;

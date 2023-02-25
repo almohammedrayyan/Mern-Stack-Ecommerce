@@ -33,6 +33,7 @@ import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
 import ProductPage from "./component/Admin/ProductAdmin/ProductPage";
 import ProductCreate from "./component/Admin/ProductAdmin/ProductCreate";
+import ProductUpdate from "./component/Admin/ProductAdmin/ProductUpdate";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -103,6 +104,12 @@ const App = () => {
           path="/admin/product"
           isAdmin={true}
           component={ProductCreate}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin/product/:id"
+          isAdmin={true}
+          component={ProductUpdate}
         />
       </Switch>
     </Router>
