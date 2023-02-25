@@ -30,6 +30,9 @@ import axios from "axios";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
 import Dashboard from "./component/Admin/Dashboard";
+import ProductList from "./component/Admin/ProductList";
+import ProductPage from "./component/Admin/ProductAdmin/ProductPage";
+import ProductCreate from "./component/Admin/ProductAdmin/ProductCreate";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -76,13 +79,32 @@ const App = () => {
         component={UpdatePassword}
       />
       <ProtectedRoute exact path="/success" component={OrderSuccess} />
+
       <ProtectedRoute exact path="/orders" component={MyOrders} />
       <Route exact path="/product/:id" component={ProductDetails} />
+
       <Switch>
-        <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/products/list"
+          component={ProductPage}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/dashboard"
+          component={Dashboard}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin/product"
+          isAdmin={true}
+          component={ProductCreate}
+        />
       </Switch>
-      <ProtectedRoute exact path="/admin/dashboard" component={Dashboard} />
     </Router>
   );
 };

@@ -19,10 +19,10 @@ exports.isAuthenticatedUser = catchError(async (req, res, next) => {
 
 exports.authorizedRoles = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(req.user.roles)) {
       return next(
         new ErrorHander(
-          `Role: ${req.user.role} is not allowed to access this resouce `,
+          `Role: ${req.user.roles} is not allowed to access this resouce `,
           403
         )
       );

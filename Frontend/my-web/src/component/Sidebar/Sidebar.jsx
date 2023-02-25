@@ -24,7 +24,7 @@ const Sidebar = () => {
               <span>Dashboard</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/admin/products/list" style={{ textDecoration: "none" }}>
             <li>
               <Inventory2OutlinedIcon className="icon" />
               <span>Products</span>

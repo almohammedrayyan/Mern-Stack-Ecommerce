@@ -8,15 +8,41 @@
   top: 100px;
 }
 
-.widgets,
-.charts {
+.widgets {
   display: flex;
   padding: 20px;
   gap: 20px;
 }
 
+.dashboardSummary {
+  margin: 2rem 0;
+}
+
+.dashboardSummary>div {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+}
+
+.dashboardSummary>div>p {
+  background-color: rgba(70, 117, 218, 0.932);
+  color: white;
+  font: 300 1.3rem "Roboto";
+  text-align: center;
+  padding: 1.5rem;
+  width: 100%;
+  margin: 0 2rem;
+}
+
 .charts {
   padding: 5px 20px;
+  width: auto;
+  position: relative;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  justify-content: center;
+
 }
 
 .listContianer {
@@ -24,6 +50,7 @@
   margin: 20px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+
 }
 
 .listTitle {
