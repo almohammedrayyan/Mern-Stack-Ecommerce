@@ -6,6 +6,7 @@ import {
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
+  adminProductDetailsReducer,
   adminProductReducer,
   newProductReducer,
   newReviewReducer,

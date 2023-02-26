@@ -33,7 +33,10 @@ import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
 import ProductPage from "./component/Admin/ProductAdmin/ProductPage";
 import ProductCreate from "./component/Admin/ProductAdmin/ProductCreate";
+import UpdateProduct from "./component/Admin/UpdateProduct";
 import ProductUpdate from "./component/Admin/ProductAdmin/ProductUpdate";
+import NewProduct from "./component/Admin/NewProduct";
+// import ProductUpdate from "./component/Admin/ProductAdmin/ProductUpdate";
 
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -87,31 +90,31 @@ const App = () => {
       <Switch>
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
         <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
-        <ProtectedRoute
-          isAdmin={true}
-          exact
-          path="/admin/products/list"
-          component={ProductPage}
-        />
-        <ProtectedRoute
-          isAdmin={true}
-          exact
-          path="/admin/dashboard"
-          component={Dashboard}
-        />
-        <ProtectedRoute
-          exact
-          path="/admin/product"
-          isAdmin={true}
-          component={ProductCreate}
-        />
-        <ProtectedRoute
-          exact
-          path="/admin/product/:id"
-          isAdmin={true}
-          component={ProductUpdate}
-        />
       </Switch>
+      <ProtectedRoute
+        isAdmin={true}
+        exact
+        path="/admin/products/list"
+        component={ProductPage}
+      />
+      <ProtectedRoute
+        isAdmin={true}
+        exact
+        path="/admin/dashboard"
+        component={Dashboard}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/product"
+        isAdmin={true}
+        component={NewProduct}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/product/:id"
+        isAdmin={true}
+        component={UpdateProduct}
+      />
     </Router>
   );
 };

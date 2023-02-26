@@ -29,12 +29,13 @@ const ProductDetails = ({ match }) => {
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-
+  console.log(product);
+  debugger;
   const { success, error: reviewError } = useSelector((state) => state.review);
 
   const options = {
     size: "large",
-    value: product.ratings,
+    value: product?.ratings,
     readOnly: true,
     precision: 0.5,
   };
@@ -102,16 +103,16 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- ECOMMERCE`} />
+          <MetaData title={`${product?.name} -- ECOMMERCE`} />
           <div className="ProductDetails">
             <div>
               <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
+                {product?.images &&
+                  product?.images.map((item, i) => (
                     <img
                       className="CarouselImage"
                       key={i}
-                      src={item.url}
+                      src={item?.url}
                       alt={`${i} Slide`}
                     />
                   ))}
@@ -120,18 +121,18 @@ const ProductDetails = ({ match }) => {
 
             <div>
               <div className="detailsBlock-1">
-                <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+                <h2>{product?.name}</h2>
+                <p>Product # {product?._id}</p>
               </div>
               <div className="detailsBlock-2">
                 <Rating {...options} />
                 <span className="detailsBlock-2-span">
                   {" "}
-                  ({product.numOfReviews} Reviews)
+                  ({product?.numOfReviews} Reviews)
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`₹${product.price}`}</h1>
+                <h1>{`₹${product?.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
@@ -148,14 +149,14 @@ const ProductDetails = ({ match }) => {
 
                 <p>
                   Status:
-                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
-                    {product.stock < 1 ? "OutOfStock" : "InStock"}
+                  <b className={product?.stock < 1 ? "redColor" : "greenColor"}>
+                    {product?.stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>
               </div>
 
               <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
+                Description : <p>{product?.description}</p>
               </div>
 
               <button onClick={submitReviewToggle} className="submitReview">

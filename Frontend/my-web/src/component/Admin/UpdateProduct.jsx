@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import "./updateProducts.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearError,
@@ -13,8 +14,11 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { UPDATE_PRODUCT_RESET } from "../../constants/productConstant";
-
+import {
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_RESET,
+} from "../../constants/productConstant";
+import { Link } from "react-router-dom";
 const UpdateProduct = ({ history, match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -27,10 +31,10 @@ const UpdateProduct = ({ history, match }) => {
   } = useSelector((state) => state.product);
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [stock, setStock] = useState();
+  const [stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -52,17 +56,17 @@ const UpdateProduct = ({ history, match }) => {
       dispatch(getOneProductDetails(productId));
     } else {
       setName(product?.name);
-      setDescription(product?.description);
       setPrice(product?.price);
-      setCategory(product?.category);
+      setDescription(product?.description);
       setStock(product?.stock);
+      setCategory(product?.category);
       setOldImages(product?.images);
     }
+
     if (error) {
       alert.error(error);
       dispatch(clearError());
     }
-
     if (updateError) {
       alert.error(updateError);
       dispatch(clearError());
@@ -70,7 +74,7 @@ const UpdateProduct = ({ history, match }) => {
 
     if (isUpdated) {
       alert.success("Product Updated Successfully");
-      history.push("/admin/products");
+      history?.push("/admin/products/list");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [
@@ -79,9 +83,9 @@ const UpdateProduct = ({ history, match }) => {
     error,
     history,
     isUpdated,
-    productId,
-    product,
     updateError,
+    product,
+    productId,
   ]);
 
   const updateProductSubmitHandler = (e) => {
@@ -103,7 +107,6 @@ const UpdateProduct = ({ history, match }) => {
 
   const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
-
     setImages([]);
     setImagesPreview([]);
     setOldImages([]);
@@ -124,7 +127,7 @@ const UpdateProduct = ({ history, match }) => {
 
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="dashboard">
         <div className="newProductContainer">
           <form
@@ -132,7 +135,7 @@ const UpdateProduct = ({ history, match }) => {
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Update Product</h1>
+            <h1>Create Product</h1>
 
             <div>
               <SpellcheckIcon />
@@ -141,7 +144,7 @@ const UpdateProduct = ({ history, match }) => {
                 placeholder="Product Name"
                 required
                 onChange={(e) => setName(e.target.value)}
-                value={product?.name}
+                value={name}
               />
             </div>
             <div>
@@ -151,7 +154,7 @@ const UpdateProduct = ({ history, match }) => {
                 placeholder="Price"
                 required
                 onChange={(e) => setPrice(e.target.value)}
-                value={product?.price}
+                value={price}
               />
             </div>
 
@@ -163,14 +166,14 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
-                value={product?.description}
+                value={description}
               ></textarea>
             </div>
 
             <div>
               <AccountTreeIcon />
               <select
-                value={product?.category}
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Choose Category</option>
@@ -186,10 +189,10 @@ const UpdateProduct = ({ history, match }) => {
               <StorageIcon />
               <input
                 type="number"
-                placeholder="stock"
+                placeholder="Stock"
                 required
                 onChange={(e) => setStock(e.target.value)}
-                value={product?.stock}
+                value={stock}
               />
             </div>
 
@@ -202,14 +205,12 @@ const UpdateProduct = ({ history, match }) => {
                 multiple
               />
             </div>
-
             <div id="createProductFormImage">
               {oldImages &&
-                oldImages?.map((image, index) => (
+                oldImages.map((image, index) => (
                   <img key={index} src={image?.url} alt="Old Product Preview" />
                 ))}
             </div>
-
             <div id="createProductFormImage">
               {imagesPreview?.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
@@ -221,7 +222,16 @@ const UpdateProduct = ({ history, match }) => {
               type="submit"
               disabled={loading ? true : false}
             >
-              Create
+              Update
+            </Button>
+            <Button id="createProductBtn1">
+              {" "}
+              <Link
+                to="/admin/products/list"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Back
+              </Link>
             </Button>
           </form>
         </div>

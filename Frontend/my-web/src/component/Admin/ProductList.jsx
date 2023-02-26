@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstant";
-import "./productList.scss";
+import "./productList.css";
 import {
   clearError,
   deleteProduct,
@@ -109,7 +109,7 @@ const ProductList = ({ history, match }) => {
         <DataGrid
           rows={rows}
           columns={columns}
-          className="datagrid"
+          className="productListTable"
           pageSize={10}
           disableSelectionOnClick
           autoHeight

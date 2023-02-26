@@ -88,7 +88,7 @@
 
 #createProductBtn {
     border: none;
-    background-color: tomato;
+    background-color: green;
     color: white;
     font: 300 0.9vmax "Roboto";
     width: 100%;
@@ -101,6 +101,24 @@
 }
 
 #createProductBtn:hover {
+    background-color: rgb(179, 66, 46);
+}
+
+#createProductBtn1 {
+    border: none;
+    background-color: tomato;
+    color: white;
+    font: 300 0.9vmax "Roboto";
+    width: 100%;
+    padding: 0.8vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+
+#createProductBtn1:hover {
     background-color: rgb(179, 66, 46);
 }
 
@@ -135,6 +153,11 @@
     }
 
     #createProductBtn {
+        font: 300 1.9vmax "Roboto";
+        padding: 1.8vmax;
+    }
+
+    #createProductBtn1 {
         font: 300 1.9vmax "Roboto";
         padding: 1.8vmax;
     }

@@ -11,6 +11,7 @@ import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstant";
+import { Link } from "react-router-dom";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const NewProduct = ({ history }) => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      history?.push("/admin/dashboard");
+      history?.push("/admin/products/list");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, history, success]);
@@ -172,6 +173,16 @@ const NewProduct = ({ history }) => {
               disabled={loading ? true : false}
             >
               Create
+            </Button>
+
+            <Button id="createProductBtn1">
+              {" "}
+              <Link
+                to="/admin/products/list"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Back
+              </Link>
             </Button>
           </form>
         </div>
