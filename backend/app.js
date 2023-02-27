@@ -7,10 +7,7 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const dotenv = require("dotenv");
 
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({ path: "backend/.env" });
-}
-
+dotenv.config({ path: "backend/.env" });
 app.use(express.json());
 app.use(cookie());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
