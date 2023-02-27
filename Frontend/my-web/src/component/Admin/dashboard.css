@@ -25,7 +25,9 @@
 }
 
 .dashboardSummary>div>p {
-  background-color: rgba(70, 117, 218, 0.932);
+  background-color: #20bf55;
+  background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+
   color: white;
   font: 300 1.3rem "Roboto";
   text-align: center;

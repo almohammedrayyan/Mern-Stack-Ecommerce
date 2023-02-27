@@ -25,7 +25,7 @@
     ul {
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 12px;
     }
     .title {
       font-size: 18px;
@@ -40,11 +40,11 @@
       padding: 5px;
       cursor: pointer;
       &:hover {
-        background-color: rgb(191, 241, 121);
+        background-color: rgb(236, 221, 57);
       }
       .icon {
         font-size: 18px;
-        color: rgb(241, 178, 63);
+        color: rgb(154, 220, 57);
       }
       span {
         font-size: 18px;

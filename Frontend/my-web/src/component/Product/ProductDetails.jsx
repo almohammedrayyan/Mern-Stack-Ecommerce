@@ -30,7 +30,6 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetails
   );
   console.log(product);
-  debugger;
   const { success, error: reviewError } = useSelector((state) => state.review);
 
   const options = {
@@ -140,7 +139,7 @@ const ProductDetails = ({ match }) => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.stock < 1 ? true : false}
+                    disabled={product?.stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -198,11 +197,11 @@ const ProductDetails = ({ match }) => {
             </DialogActions>
           </Dialog>
 
-          {product.reviews && product.reviews[0] ? (
+          {product?.reviews && product?.reviews[0] ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
+              {product?.reviews &&
+                product?.reviews.map((review) => (
+                  <ReviewCard key={review?._id} review={review} />
                 ))}
             </div>
           ) : (

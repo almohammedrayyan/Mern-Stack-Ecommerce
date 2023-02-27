@@ -4,9 +4,12 @@ const cookie = require("cookie-parser");
 const app = express();
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-
+const path = require("path");
 const dotenv = require("dotenv");
-dotenv.config({ path: "backend/.env" });
+
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/.env" });
+}
 
 app.use(express.json());
 app.use(cookie());
@@ -25,6 +28,10 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
+app.use(express.static(path.join(__dirname, "../Frontend/my-web/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../Frontend/my-web/build/index.html"));
+});
 //Middleware for error
 app.use(errorMiddleware);
 module.exports = app;

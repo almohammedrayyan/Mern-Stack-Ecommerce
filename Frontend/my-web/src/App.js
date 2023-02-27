@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./app.css";
 import { useEffect } from "react";
 import store from "../src/store";
-import { loadUser, updateProfile } from "../src/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "../src/actions/userActions";
+import { useSelector } from "react-redux";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import WebFont from "webfontloader";
@@ -30,14 +30,19 @@ import axios from "axios";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
 import Dashboard from "./component/Admin/Dashboard";
-import ProductList from "./component/Admin/ProductList";
 import ProductPage from "./component/Admin/ProductAdmin/ProductPage";
-import ProductCreate from "./component/Admin/ProductAdmin/ProductCreate";
 import UpdateProduct from "./component/Admin/UpdateProduct";
-import ProductUpdate from "./component/Admin/ProductAdmin/ProductUpdate";
 import NewProduct from "./component/Admin/NewProduct";
-// import ProductUpdate from "./component/Admin/ProductAdmin/ProductUpdate";
-
+import AdminPage from "./component/Admin/ProductAdmin/AdminPage";
+import UserUpdate from "./component/Admin/UserUpdate";
+import OrderAdmin from "./component/Admin/ProductAdmin/OrderAdmin";
+import ProcessOrder from "./component/Admin/OrderDetails";
+import ProductReviews from "./component/Admin/ProductReviews";
+import Footer from "./component/layout/Footer/Footer.js";
+// import NotFound from "./component/layout/Not Found/NotFound";
+import Contact from "./component/layout/Contact/Contact";
+import About from "./component/layout/About/About";
+import Search from "./component/Product/Search";
 const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeAPiKey] = useState("");
@@ -55,6 +60,7 @@ const App = () => {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <Router>
       <Header />
@@ -74,8 +80,10 @@ const App = () => {
 
       <Route exact path="/password/forgot" component={ForgotPassword} />
       <Route exact path="/cart" component={Cart} />
+      <Route exact path="/contact" component={Contact} />
+      <Route exact path="/about" component={About} />
 
-      {/* <Route exact path="/search" component={Search} /> */}
+      <Route exact path="/search" component={Search} />
       <Route exact path="/password/reset/:token" component={ResetPassword} />
       <ProtectedRoute
         exact
@@ -115,6 +123,38 @@ const App = () => {
         isAdmin={true}
         component={UpdateProduct}
       />
+      <ProtectedRoute
+        exact
+        path="/admin/users"
+        isAdmin={true}
+        component={AdminPage}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/users/:id"
+        isAdmin={true}
+        component={UserUpdate}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/orders"
+        isAdmin={true}
+        component={OrderAdmin}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/order/:id"
+        isAdmin={true}
+        component={ProcessOrder}
+      />
+      <ProtectedRoute
+        exact
+        path="/admin/reviews"
+        isAdmin={true}
+        component={ProductReviews}
+      />
+
+      <Footer />
     </Router>
   );
 };

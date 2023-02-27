@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
-import logo from "../../../images/logo.png";
+import logo from "../../../images/logo2.png";
 import { HiSearch } from "react-icons/hi";
 import { BiCartAlt } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";

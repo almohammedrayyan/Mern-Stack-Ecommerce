@@ -1,0 +1,68 @@
+.datatable {
+    height: 600px;
+    padding: 25px;
+    display: flex;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.datatableTitle {
+    flex-grow: 1;
+    width: 100px;
+    font-size: 25px;
+    color: grey;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 75px;
+}
+
+.datatableTitle .link {
+    text-decoration: none;
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+    top: -7px;
+}
+
+
+
+.productListTable {
+    background-color: white;
+    border: none !important;
+}
+
+.productListTable div {
+    font: 300 1vmax "Roboto";
+    color: rgba(0, 0, 0, 0.678);
+    border: none !important;
+}
+
+.productListTable a,
+.productListTable button {
+    color: rgba(0, 0, 0, 0.527);
+    transition: all 0.5s;
+}
+
+.productListTable a:hover {
+    color: tomato;
+}
+
+.productListTable button:hover {
+    color: rgb(236, 30, 30);
+}
+
+.MuiDataGrid-columnHeader div {
+    color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 600px) {
+    .productListTable div {
+        font: 300 4vw "Roboto";
+    }
+}

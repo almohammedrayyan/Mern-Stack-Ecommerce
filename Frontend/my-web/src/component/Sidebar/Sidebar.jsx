@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
-import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import React from "react";
 import "./sidebar.scss";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import ReorderIcon from "@mui/icons-material/Reorder";
+
+import { RxDashboard } from "react-icons/rx";
+import { RiProductHuntLine } from "react-icons/ri";
+import { MdRateReview } from "react-icons/md";
+import { HiUsers } from "react-icons/hi";
+import { IoMdReorder } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 const Sidebar = () => {
-  // const { dispatch } = useContext(DarkModeContext);
-
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Crusion</span>
+          <span className="logo">Zebion</span>
         </Link>
       </div>
       <hr />
@@ -20,27 +21,34 @@ const Sidebar = () => {
         <ul>
           <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
             <li>
-              <DashboardCustomizeOutlinedIcon className="icon" />
+              <RxDashboard className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
           <Link to="/admin/products/list" style={{ textDecoration: "none" }}>
             <li>
-              <Inventory2OutlinedIcon className="icon" />
+              <RiProductHuntLine className="icon" />
               <span>Products</span>
             </li>
           </Link>
-          <Link to="/review" style={{ textDecoration: "none" }}>
+          <Link to="/admin/reviews" style={{ textDecoration: "none" }}>
             <li>
-              <Inventory2OutlinedIcon className="icon" />
+              <MdRateReview className="icon" />
               <span>Review</span>
             </li>
           </Link>
-
-          <li>
-            <ReorderIcon className="icon" />
-            <span>Orders</span>
-          </li>
+          <Link to="/admin/users" style={{ textDecoration: "none" }}>
+            <li>
+              <HiUsers className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/admin/orders" style={{ textDecoration: "none" }}>
+            <li>
+              <IoMdReorder className="icon" />
+              <span>Orders</span>
+            </li>
+          </Link>
         </ul>
       </div>
 
