@@ -27,16 +27,16 @@ const Dashboard = () => {
   let outOfStock = 0;
 
   products &&
-    products.forEach((item) => {
-      if (item.Stock === 0) {
+    products?.forEach((item) => {
+      if (item.stock === 0) {
         outOfStock += 1;
       }
     });
 
   let totalAmount = 0;
   orders &&
-    orders.forEach((item) => {
-      totalAmount += item.totalPrice;
+    orders?.forEach((item) => {
+      totalAmount += item?.totalPrice;
     });
   return (
     <div className="home">
@@ -54,7 +54,7 @@ const Dashboard = () => {
           <Widgets
             title="Order"
             link="View all"
-            amount={orders && orders.length}
+            amount={orders && orders?.length}
             url="/orders"
             icon={
               <BiMoney
@@ -70,7 +70,7 @@ const Dashboard = () => {
             type="earning"
             title="Product"
             link="View all"
-            amount={products && products.length}
+            amount={products && products?.length}
             url="/admin/products/list"
             icon={
               <BiShoppingBag
@@ -86,7 +86,7 @@ const Dashboard = () => {
             type="balance"
             title="Users"
             link="View All"
-            amount={users && users.length}
+            amount={users && users?.length}
             url="/admin/users"
             icon={
               <MdOutlineAccountBalance

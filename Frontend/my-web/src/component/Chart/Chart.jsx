@@ -29,16 +29,16 @@ const Chart = () => {
   let outOfStock = 0;
 
   products &&
-    products.forEach((item) => {
-      if (item.Stock === 0) {
+    products?.forEach((item) => {
+      if (item.stock === 0) {
         outOfStock += 1;
       }
     });
 
   let totalAmount = 0;
   orders &&
-    orders.forEach((item) => {
-      totalAmount += item.totalPrice;
+    orders?.forEach((item) => {
+      totalAmount += item?.totalPrice;
     });
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
@@ -58,7 +58,7 @@ const Chart = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, products.length - outOfStock],
+        data: [outOfStock, products?.length - outOfStock],
       },
     ],
   };
