@@ -7,7 +7,7 @@ exports.isAuthenticatedUser = catchError(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    return next(new ErrorHander("Please Login to access this resource", 401));
+    return next(new ErrorHandling("Please Login to access this resource", 401));
   }
 
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
@@ -19,10 +19,10 @@ exports.isAuthenticatedUser = catchError(async (req, res, next) => {
 
 exports.authorizedRoles = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.roles)) {
+    if (!roles.includes(req.user.role)) {
       return next(
-        new ErrorHander(
-          `Role: ${req.user.roles} is not allowed to access this resouce `,
+        new ErrorHandling(
+          `Role: ${req.user.role} is not allowed to access this resouce `,
           403
         )
       );

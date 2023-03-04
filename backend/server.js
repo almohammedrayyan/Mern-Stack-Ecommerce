@@ -1,5 +1,4 @@
 const app = require("./app");
-
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDataBase = require("./confiq/database");
@@ -11,7 +10,6 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 //confiq
-
 dotenv.config({ path: "backend/.env" });
 
 //connecting database

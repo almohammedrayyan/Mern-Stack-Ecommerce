@@ -25,10 +25,10 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
-app.use(express.static(path.join(__dirname, "../Frontend/my-web/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../Frontend/my-web/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../Frontend/my-web/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../Frontend/my-web/build/index.html"));
+// });
 //Middleware for error
 app.use(errorMiddleware);
 module.exports = app;

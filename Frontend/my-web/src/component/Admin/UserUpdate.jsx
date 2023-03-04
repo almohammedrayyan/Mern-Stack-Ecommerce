@@ -29,7 +29,7 @@ const UserUpdate = ({ history, match }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [roles, setRoles] = useState("");
+  const [role, setRoles] = useState("");
 
   const userId = match?.params?.id;
 
@@ -39,7 +39,7 @@ const UserUpdate = ({ history, match }) => {
     } else {
       setName(user?.name);
       setEmail(user?.email);
-      setRoles(user?.roles);
+      setRoles(user?.role);
     }
     if (error) {
       alert.error(error);
@@ -65,7 +65,7 @@ const UserUpdate = ({ history, match }) => {
 
     myForm.set("name", name);
     myForm.set("email", email);
-    myForm.set("roles", roles);
+    myForm.set("roles", role);
 
     dispatch(updateUser(userId, myForm));
   };
@@ -107,10 +107,7 @@ const UserUpdate = ({ history, match }) => {
 
               <div>
                 <VerifiedUserIcon />
-                <select
-                  value={roles}
-                  onChange={(e) => setRoles(e.target.value)}
-                >
+                <select value={role} onChange={(e) => setRoles(e.target.value)}>
                   <option value="">Choose Role</option>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
@@ -121,7 +118,7 @@ const UserUpdate = ({ history, match }) => {
                 id="createProductBtn"
                 type="submit"
                 disabled={
-                  updateLoading ? true : false || roles === "" ? true : false
+                  updateLoading ? true : false || role === "" ? true : false
                 }
               >
                 Update

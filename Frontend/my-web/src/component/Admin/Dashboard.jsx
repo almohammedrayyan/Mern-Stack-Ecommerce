@@ -71,7 +71,7 @@ const Dashboard = () => {
             title="Product"
             link="View all"
             amount={products && products?.length}
-            url="/admin/products/list"
+            url="/admin/products"
             icon={
               <BiShoppingBag
                 className="icon"
