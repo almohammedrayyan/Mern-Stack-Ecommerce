@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server.js",
-    "Frontend": "npm install --prefix Frontend",
+    "frontend": "npm install --prefix Frontend/my-web",
     "server": "nodemon backend/server.js",
     "dev": "concurrently \"npm run backend\" \"npm run Frontend\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Frontend && npm run build --prefix Frontend"
+    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Frontend/my-web && npm run build --prefix Frontend/my-web"
   },
   "repository": {
     "type": "git",
