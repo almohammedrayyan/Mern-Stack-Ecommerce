@@ -13,6 +13,7 @@ app.use(cookie());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(fileUpload());
+
 //Route Imports
 
 const product = require("./routes/productRoutes");
@@ -25,9 +26,9 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
-app.use(express.static(path.join(__dirname, "../Frontend/my-web/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../Frontend/my-web/build/index.html"));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
 //Middleware for error
 app.use(errorMiddleware);
