@@ -6,10 +6,10 @@ import "./ConfirmOrder.css";
 import { Link, useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 
-const ConfirmOrder = () => {
+const ConfirmOrder = ({ history }) => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const history = useHistory();
+  // const history = useHistory();
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0

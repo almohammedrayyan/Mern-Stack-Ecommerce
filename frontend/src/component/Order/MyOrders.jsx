@@ -102,7 +102,7 @@ const MyOrders = () => {
             autoHeight
           />
 
-          <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>
+          <Typography id="myOrdersHeading">{user?.name}'s Orders</Typography>
         </div>
       )}
     </Fragment>
