@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server.js",
-    "frontend": "npm install --prefix Frontend/my-web",
-    "server": "nodemon backend/server.js",
-    "dev": "concurrently \"npm run backend\" \"npm run Frontend\"",
+    "dev": "nodemon backend/server.js",
     "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Frontend/my-web && npm run build --prefix Frontend/my-web"
   },
   "repository": {
